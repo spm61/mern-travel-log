@@ -1,24 +1,54 @@
-const typeDefs = `
-  type User {
-    _id: ID!
-	firstName: String
-	lastName: String
-    email: String
-  }
+const { gql } = require("apollo-server-express");
 
+const typeDefs = gql`
+  type User {
+    _id: ID
+    username: String
+    email: String
+    cityCount: Int
+    savedCities: [City]
+  }
+  type City {
+    cityId: String
+    formattedAddress: String
+    cityName: String
+    countyName: String
+    stateName: String
+    countryName: String
+    latitude: Float
+    longitude: Float
+  }
   type Auth {
-    token: ID!
+    token: ID
     user: User
   }
-
   type Query {
     me: User
   }
-
   type Mutation {
-    login(email: String!, password: String!): Auth
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-	updateUser(firstName: String, lastName: String, email: String, password: String): User
+    addUser(username: String, email: String, password: String): Auth
+    login(email: String, password: String): Auth
+    saveBook(
+      bookId: String
+      authors: [String]
+      description: String
+      title: String
+      image: String
+      link: String
+    ): User
+    
+  saveCity(
+    cityId: String
+    formattedAddress: String
+    cityName: String
+    countyName: String
+    stateName: String
+    countryName: String
+    latitude: Float
+    longitude: Float
+  ): User
+
+    removeCity(cityId: String): User
   }
 `;
 

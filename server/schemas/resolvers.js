@@ -1,50 +1,85 @@
-const { User } = require('../models');
-const { signToken, AuthenticationError } = require('../utils/auth');
+const { User } = require("../models");
+const { signToken } = require("../utils/auth");
+const { AuthenticationError } = require("apollo-server-express");
 
 const resolvers = {
-	Query: {
-		me: async (parent, args, context) => {
-			if (context.user) {
-				const userData = await User.findOne({ _id: context.user._id }).select('-__v -password');
+  Query: {
+    me: async (parent, args, context) => {
+      if (context.user) {
+        console.log("resolvers.js query me before findone")
+        const results = User.findOne({ _id: context.user._id });
+        console.log("resolvers.js query me after findone results" + results)
+        return results;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+  },
 
-				return userData;
-			}
+  Mutation: {
+    addUser: async (parent, { username, email, password }) => {
+      console.log("resolvers.js addUser:" + username + " email:" + email + " pass:" + password )
+      const user = await User.create({ username, email, password });
+      console.log("resolvers.js addUser user:" + user )
 
-			throw AuthenticationError;
-		},
-	},
+      const token = signToken(user);
+      console.log("resolvers.js addUser token:" + token )
 
-	Mutation: {
-		addUser: async (parent, args) => {
-			const user = await User.create(args);
-			const token = signToken(user);
+      return { token, user };
+    },
+    login: async (parent, { email, password }) => {
+      console.log("resolvers.js logi enter email:" + email)
+      const user = await User.findOne({ email });
+      console.log("resolvers.js login user" + user)
 
-			return { token, user };
-		},
-		updateUser: async (parent, args, context) => {
-			if (context.user) {
-				return await User.findByIdAndUpdate(context.user._id, args, { new: true });
-			}
+      if (!user) {
+        throw new AuthenticationError("No user found with this email address");
+      }
 
-			throw AuthenticationError;
-		},
-		login: async (parent, { email, password }) => {
-			const user = await User.findOne({ email });
+      const correctPw = await user.isCorrectPassword(password);
 
-			if (!user) {
-				throw AuthenticationError;
-			}
+      if (!correctPw) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
 
-			const correctPw = await user.isCorrectPassword(password);
+      const token = signToken(user);
 
-			if (!correctPw) {
-				throw AuthenticationError;
-			}
+      return { token, user };
+    },
 
-			const token = signToken(user);
-			return { token, user };
-		}
-	},
+    saveCity: async (
+      parent,
+      { cityId, formattedAddress, cityName, countyName, stateName, countryName, latitude, longitude},
+      context
+    ) => {
+      console.log("resolvers.js enter saveCity Cityname:" + cityName)
+  
+      if (context.user) {
+        return User.findOneAndUpdate(
+          { _id: context.user._id },
+          {
+            $addToSet: {
+              savedCities: { cityId, formattedAddress, cityName, countyName, stateName, countryName, latitude, longitude },
+            },
+          },
+          { new: true, runValidators: true }
+        );
+      } else {
+        throw new AuthenticationError("You need to be logged in!");
+      }
+    },
+    removeCity: async (parent, { cityId }, context) => {
+      if (context.user) {
+        return User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { savedCities: { cityId } } },
+          { new: true, runValidators: true }
+        );
+      } else {
+        throw new AuthenticationError("You need to be logged in!");
+      }
+    },
+
+  },
 };
 
 module.exports = resolvers;
