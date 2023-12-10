@@ -21,7 +21,7 @@ const router = createBrowserRouter([
         element: <SearchCities /> // The component to render for the index route
       },
       {
-        path: '/saved', // The path for saved books
+        path: '/saved', // The path for saved cities
         element: <SavedCities /> // The component to render at '/saved'
       }
     ]
