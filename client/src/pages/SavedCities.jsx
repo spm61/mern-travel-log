@@ -8,16 +8,16 @@ import Auth from "../utils/auth";
 import { removeCityId } from "../utils/localStorage";
 import { REMOVE_CITY } from "../utils/mutations";
 
-// savedCities component for displaying and managing user's saved books.
+// savedCities component for displaying and managing user's saved cities.
 const SavedCities = () => {
   // Fetching user data using Apollo Client's useQuery hook.
   const { loading, data } = useQuery(GET_ME);
   let userData = data?.me || {};
 
-  // Setting up a mutation for removing a book.
+  // Setting up a mutation for removing a city.
   const [removeCity] = useMutation(REMOVE_CITY);
 
-  // Function to handle book deletion both from database and local storage.
+  // Function to handle city deletion both from database and local storage.
   const handleDeleteCity = async (cityId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -26,14 +26,14 @@ const SavedCities = () => {
     }
 
     try {
-      // Attempting to remove the book using the removeBook mutation.
+      // Attempting to remove the city using the removeCity mutation.
       const { data } = await removeCity({ variables: { cityId } });
 
       if (!data) {
         throw new Error("something went wrong!");
       }
 
-      // Removing the book's ID from local storage on successful deletion.
+      // Removing the City's ID from local storage on successful deletion.
       removeCityId(cityId);
     } catch (err) {
       console.error(err);
@@ -45,7 +45,7 @@ const SavedCities = () => {
     return <h2>LOADING...</h2>;
   }
 
-  // Rendering the saved books using a Card layout.
+  // Rendering the saved cities using a Card layout.
   return (
     <>
       <div fluid className="text-light bg-dark">

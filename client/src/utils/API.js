@@ -28,7 +28,7 @@ export const loginUser = (userData) => {
   });
 };
 
-// save book data for a logged in user
+// save city data for a logged in user
 export const saveCity = (cityData, token) => {
   return fetch('/api/users', {
     method: 'PUT',
@@ -40,21 +40,15 @@ export const saveCity = (cityData, token) => {
   });
 };
 
-// remove saved book data for a logged in user
+// remove saved city data for a logged in user
 export const deleteCity = (cityId, token) => {
-  return fetch(`/api/users/books/${cityId}`, {
+  return fetch(`/api/users/cities/${cityId}`, {
     method: 'DELETE',
     headers: {
       authorization: `Bearer ${token}`,
     },
   });
 };
-
-// make a search to google books api
-// https://www.googleapis.com/books/v1/volumes?q=harry+potter
-//export const searchGoogleBooks = (query) => {
-//  return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
-//};
 
 const apiKey = "AIzaSyDwkYPjXsxzUOY4rsDbJh0yY_uksIYMPY0"; //google api key
 

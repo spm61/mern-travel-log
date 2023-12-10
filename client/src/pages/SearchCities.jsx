@@ -12,7 +12,6 @@ import Auth from '../utils/auth';
 import { useMutation } from '@apollo/client';
 import { SAVE_CITY } from '../utils/mutations';
 
-//import { saveBook, searchGoogleBooks } from '../utils/API';
 import { searchGooglePlaces } from '../utils/API';
 import { saveCityIds, getSavedCityIds } from '../utils/localStorage';
 
@@ -27,20 +26,19 @@ const SearchCities = () => {
           // Set up the mutation with error handling support.
           // The useMutation hook allows providing the refetchQueries option to refetch specific queries after a mutation
           // This is useful to ensure that new data is displayed automatically. Otherwise, we would need to manually update the list at a higher component level, modify state, or implement custom caching behavior
-          //const [saveBook, { error }] = useMutation(SAVE_BOOK, { ...userFormData  });
           const [saveCity] = useMutation(SAVE_CITY);
 
 
-  // create state to hold saved bookId values
+  // create state to hold saved cityId values
   const [savedCityIds, setSavedCityIds] = useState(getSavedCityIds());
 
-  // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
+  // set up useEffect hook to save `savedCityIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
     return () => saveCityIds(savedCityIds);
   });
 
-  // create method to search for books and set state on form submit
+  // create method to search for cities and set state on form submit
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -75,9 +73,9 @@ const SearchCities = () => {
     }
   };
 
-  // create function to handle saving a book to our database
+  // create function to handle saving a city to our database
   const handleSaveCity = async (cityId) => {
-    // find the book in `searchedBooks` state by the matching id
+    // find the city in `searchedCities` state by the matching id
     const cityToSave = searchedCities.find((city) => city.cityId === cityId);
 
     // get token
@@ -88,14 +86,13 @@ const SearchCities = () => {
     }
 
     try {
-     // const response = await saveBook(bookToSave, token);
      const response = await saveCity({ variables: cityToSave, token} );
 
       //if (!response.ok) {
       //  throw new Error('something went wrong!');
      // }
 
-      // if book successfully saves to user's account, save book id to state
+      // if city successfully saves to user's account, save city id to state
       setSavedCityIds([...savedCityIds, cityToSave.cityId]);
     } catch (err) {
       console.error(err);
