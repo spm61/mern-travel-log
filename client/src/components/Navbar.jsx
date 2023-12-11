@@ -22,11 +22,11 @@ const AppNavbar = () => {
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
             <Nav className='ml-auto d-flex'>
-              <Nav.Link as={Link} to='/'>Search For Locations</Nav.Link>
+              <Nav.Link as={Link} to='/'>Home</Nav.Link>
               {/* Conditional rendering based on user's authentication status. */}
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link as={Link} to='/saved'>See Your Locations</Nav.Link>
+                  <Nav.Link as={Link} to='/dashboard'>Dashboard</Nav.Link>
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                 </>
               ) : (

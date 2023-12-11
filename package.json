@@ -12,6 +12,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  },
   "devDependencies": {
     "concurrently": "^8.2.0"
   }
