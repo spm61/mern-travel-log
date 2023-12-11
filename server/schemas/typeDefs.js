@@ -22,9 +22,15 @@ const typeDefs = gql`
     token: ID
     user: User
   }
+  type APIKey {
+    apikey: String
+  }
   type Query {
     me: User
+    cities: [User]
+    apikey: APIKey
   }
+
   type Mutation {
     addUser(username: String, email: String, password: String): Auth
     login(email: String, password: String): Auth

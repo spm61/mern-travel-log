@@ -5,8 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'; // Importing Bootstrap CSS for st
 
 // Importing React components for different pages
 import App from './App.jsx';
-import SearchCities from './pages/SearchCities';
-import SavedCities from './pages/SavedCities';
+import Home from './pages/Home';
+import Dashboard from './pages/Dashboard';
 
 // Creating a router using the createBrowserRouter function from react-router-dom.
 // This router defines the navigation structure of the app.
@@ -18,11 +18,11 @@ const router = createBrowserRouter([
     children: [ // Nested routes under the base path
       {
         index: true, // The default route under '/'
-        element: <SearchCities /> // The component to render for the index route
+        element: <Home /> // The component to render for the index route
       },
       {
-        path: '/saved', // The path for saved cities
-        element: <SavedCities /> // The component to render at '/saved'
+        path: '/dashboard', // The path for saved cities
+        element: <Dashboard /> // The component to render at '/dashboard'
       }
     ]
   }

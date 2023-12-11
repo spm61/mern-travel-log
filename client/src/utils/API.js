@@ -1,3 +1,5 @@
+
+
 // route to get logged in user's info (needs the token)
 export const getMe = (token) => {
   return fetch('/api/users/me', {
@@ -50,12 +52,18 @@ export const deleteCity = (cityId, token) => {
   });
 };
 
-const apiKey = "AIzaSyDwkYPjXsxzUOY4rsDbJh0yY_uksIYMPY0"; //google api key
 
-//    const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${encodeURIComponent(userInput)}&inputtype=textquery&fields=name,rating,formatted_address&key=${apiKey}`;
 
-export const searchGooglePlaces = (query) => {
-  return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${query}&key=${apiKey}`);
+export const searchGooglePlaces = (query, apiKey2) => {
+
+
+  //console.log("api.js apikey" + apiKey)
+  //console.log("api.js query" + query)
+  //console.log("api.js fethstring 1: https://maps.googleapis.com/maps/api/geocode/json?address=" + query + "&key=" + apiKey)
+  //console.log("api.js fethstring 2: https://maps.googleapis.com/maps/api/geocode/json?address=" + query + "&key=" + apiKey2)
+
+  
+  return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${query}&key=${apiKey2}`);
 
 };
 

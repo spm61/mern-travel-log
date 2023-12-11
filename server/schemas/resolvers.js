@@ -1,6 +1,7 @@
 const { User } = require("../models");
 const { signToken } = require("../utils/auth");
 const { AuthenticationError } = require("apollo-server-express");
+require('dotenv').config();
 
 const resolvers = {
   Query: {
@@ -12,6 +13,14 @@ const resolvers = {
         return results;
       }
       throw new AuthenticationError("You need to be logged in!");
+    },
+
+    cities: async () => {
+      return User.find().sort({ createdAt: -1 });
+    },
+    apikey: async () => {
+      console.log("************* resolvers.js APIKEY:" + process.env.GOOGLE_API_KEY)
+      return {apikey: process.env.GOOGLE_API_KEY}
     },
   },
 
