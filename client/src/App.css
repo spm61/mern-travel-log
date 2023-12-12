@@ -1,14 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;800&display=swap');
+
 body {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Sora', sans-serif;
+  
 }
 
-h1,
+h1 {
+  font-weight: 800;
+  font-style: bold;
+}
+
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: 'Rubik Mono One', sans-serif;
+  font-family: 'Sora', sans-serif;
+  font-style: bold;
+  font-weight: 400;
 }
 
 .small {
@@ -30,4 +39,6 @@ h6 {
 
 .Navbar {
   color: #87C4FF;
+  font-family: 'Sora', sans-serif;
 }
+
