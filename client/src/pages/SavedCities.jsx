@@ -48,34 +48,39 @@ const SavedCities = () => {
   // Rendering the saved cities using a Card layout.
   return (
     <>
-      <div fluid className="text-light bg-primary">
-        <Container class="rounded">
+      <div className="text-light bg-primary p-5 round">
+        <Container>
           <h1>Viewing saved Cities!</h1>
         </Container>
       </div>
       <Container>
-        <h2 className='pt-5'>
+        <h2 className="pt-5">
           {userData.savedCities?.length
-            ? `Viewing ${userData.savedCities.length} saved ${userData.savedCities.length === 1 ? "city" : "cities"}:`
+            ? `Viewing ${userData.savedCities.length} saved ${
+                userData.savedCities.length === 1 ? "city" : "cities"
+              }:`
             : "You have no saved cities!"}
         </h2>
-          <Row>
+        <Row>
           {userData.savedCities.map((city) => {
             return (
               <Col md="4">
-                <Card key={city.cityId} border='dark'>
+                <Card key={city.cityId} border="dark">
                   <Card.Body>
                     <Card.Title>{city.formattedAddress}</Card.Title>
-                    <p className='small'>City: {city.cityName}</p>
+                    <p className="small">City: {city.cityName}</p>
                     <Card.Text>
-                    <p className='small'>City: {city.cityName}</p>
-                    <p className='small'>County: {city.countyName}</p>
-                    <p className='small'>State:{city.stateName}</p>
-                    <p className='small'>Country: {city.countryName}</p>
-                    <p className='small'>Latitude: {city.latitude}</p>
-                    <p className='small'>Longitude: {city.longitude}</p>
+                      <p className="small">City: {city.cityName}</p>
+                      <p className="small">County: {city.countyName}</p>
+                      <p className="small">State:{city.stateName}</p>
+                      <p className="small">Country: {city.countryName}</p>
+                      <p className="small">Latitude: {city.latitude}</p>
+                      <p className="small">Longitude: {city.longitude}</p>
                     </Card.Text>
-                    <Button className='btn-block btn-danger' onClick={() => handleDeleteCity(city.cityId)}>
+                    <Button
+                      className="btn-block btn-danger"
+                      onClick={() => handleDeleteCity(city.cityId)}
+                    >
                       Delete this City!
                     </Button>
                   </Card.Body>
