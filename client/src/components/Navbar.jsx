@@ -16,7 +16,7 @@ const AppNavbar = () => {
   return (
     // JSX code for rendering the navigation bar using React Bootstrap components.
     <>
-      <Navbar bg='dark' variant='dark' expand='lg'>
+      <Navbar bg='primary' variant='dark' expand='lg'>
         <Container fluid>
           <Navbar.Brand as={Link} to='/'>MERN Travel Log</Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />

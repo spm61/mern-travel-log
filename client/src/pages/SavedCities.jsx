@@ -48,7 +48,7 @@ const SavedCities = () => {
   // Rendering the saved cities using a Card layout.
   return (
     <>
-      <div fluid className="text-light bg-dark">
+      <div fluid className="text-light bg-primary">
         <Container>
           <h1>Viewing saved Cities!</h1>
         </Container>

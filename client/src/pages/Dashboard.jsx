@@ -163,7 +163,7 @@ const handleFormSubmit = async (event) => {
   // Rendering the saved cities using a Card layout.
   return (
     <>
-             <div className="text-light bg-dark p-5">
+             <div className="text-light bg-primary p-5">
         <Container>
           <h1>Search for Locations</h1>
           <Form onSubmit={handleFormSubmit}>
@@ -237,7 +237,7 @@ const handleFormSubmit = async (event) => {
 
 
 
-      <div fluid className="text-light bg-dark">
+      <div fluid className="text-light bg-primary">
         <Container>
           <h1>Viewing {userData.username}'s saved Cities!</h1>
         </Container>
