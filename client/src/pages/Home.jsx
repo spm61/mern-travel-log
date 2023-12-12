@@ -12,6 +12,9 @@ import { useQuery } from '@apollo/client';
 import { saveCityIds, getSavedCityIds } from '../utils/localStorage';
 import { QUERY_CITIES} from '../utils/queries';
 
+//Setting background color to a "sand" themed color
+document.body.style = 'background: #FFEED9;';
+
 const DisplayCities = () => {
   // create state for holding returned google api data
     
