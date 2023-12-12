@@ -49,7 +49,7 @@ const SavedCities = () => {
   return (
     <>
       <div fluid className="text-light bg-primary">
-        <Container>
+        <Container class="rounded">
           <h1>Viewing saved Cities!</h1>
         </Container>
       </div>

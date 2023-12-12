@@ -102,7 +102,7 @@ const SearchCities = () => {
   return (
     <>
       <div className="text-light bg-primary p-5">
-        <Container>
+        <Container class="rounded">
           <h1>Search for Locations</h1>
           <Form onSubmit={handleFormSubmit}>
             <Row>
