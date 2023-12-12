@@ -12,7 +12,7 @@
   For styling, Bootstrap and SASS were employed to color the website and give it a modern feel.
 
   ## Usage:
-  To use this application, visit the link to the deployment here: (to be added).  
+  To use this application, visit the link to the deployment [here.](https://glacial-savannah-99554-420b467dec97.herokuapp.com/)
   Alternatively, you can run the project locally by cloning the repo to your local system then using a command prompt in the projects directory to install the necessary packages.  Node and React must be installed on the target environment in order to do this
 
   Once online, you can sign up for a user account by clicking the sign up button.  From there, you should be able to search and save cities, as well as view other user's saved cities.  
