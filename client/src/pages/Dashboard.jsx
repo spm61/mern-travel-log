@@ -47,7 +47,7 @@ const SavedCities = () => {
 
   // Use optional chaining to check if data exists and if it has a thoughts property. If not, return an empty array to use.
   const apikey = apiData?.apikey.apikey || [];
-  console.log("savedcities.jsx apikey:" + apikey);
+  console.log("dashboard.jsx apikey:" + apikey);
 
   // Fetching user data using Apollo Client's useQuery hook.
   const { loading, data } = useQuery(GET_ME);
@@ -62,29 +62,51 @@ const SavedCities = () => {
     }
 
     try {
-      console.log("savedcities.jsx apikey search google: " + apikey);
-      const response = await searchGooglePlaces(searchInput, apikey);
+          console.log("dashboard.jsx apikey search google: " + apikey);
+          const response = await searchGooglePlaces(searchInput, apikey);
 
-      if (!response.ok) {
-        throw new Error("something went wrong!");
-      }
+          if (!response.ok) {
+            throw new Error("something went wrong!");
+          }
 
-      let { results } = await response.json();
+          let { results } = await response.json();
 
-      const cityData = results.map((city) => ({
-        cityId: city.place_id,
-        formattedAddress: city.formatted_address,
-        cityName: city.address_components[0].long_name,
-        countyName: city.address_components[1].long_name,
-        stateName: city.address_components[2].long_name,
-        countryName: city.address_components[3].long_name,
-        latitude: city.geometry.location.lat,
-        longitude: city.geometry.location.lng,
-      }));
+          console.log("dashboard results: " + results)
 
-      setSearchedCities(cityData);
-      setSearchInput("");
-    } catch (err) {
+          if(results.length > 0) {
+            const cityData = results.map((city) => ({
+              cityId: city.place_id,
+              formattedAddress: city.formatted_address,
+              cityName: city.address_components[0].long_name,
+              countyName: city.address_components[1].long_name,
+              stateName: city.address_components[2].long_name,
+              countryName: city.address_components[3].long_name,
+              latitude: city.geometry.location.lat,
+              longitude: city.geometry.location.lng,
+            }));
+            setSearchedCities(cityData);
+            setSearchInput("");
+          
+          } else {
+            const cityData = [{
+              cityId: "not Defined",
+              formattedAddress: "Not Available",
+              cityName: "Not Available",
+              countyName: "Not Available",
+              stateName: "Not Available",
+              countryName: "Not Available",
+              latitude: 0,
+              longitude: 0,
+            }]
+
+            setSearchedCities(cityData);
+            setSearchInput("");
+
+          }
+
+     }
+    
+    catch (err) {
       const cityData = [{
         cityId: "not Defined",
         formattedAddress: "Not Available",
@@ -109,7 +131,7 @@ const SavedCities = () => {
 
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-    console.log("searchcities.jsx token:" + JSON.stringify(token));
+    console.log("dashboard.jsx token:" + JSON.stringify(token));
     if (!token) {
       return false;
     }
