@@ -65,3 +65,14 @@ h6 {
 .navbar-custom {
   background-color: #ff5500;
 }
+
+.rounded-container {
+  border-radius: 200px; /* Adjust the radius as needed */
+}
+.rounded-div {
+  border-radius: 10px; /* Adjust the radius as needed */
+}
+
+.rounded-h2 {
+  border-radius: 10px; /* Adjust the radius as needed */
+}
