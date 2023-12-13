@@ -46,12 +46,12 @@ const [savedCityIds, setSavedCityIds] = useState(getSavedCityIds());
       <Container>
         <h2 className='pt-5'>
           {allSavedCities.length
-            ? `Viewing ${allSavedCities.length} Cities logged:`
+            ? `Viewing all Cities logged:`
             : 'No Cities Logged!'}
         </h2>
         <Row>
-        {allSavedCities.map((city) => {
-      return (
+        {allSavedCities.map((city=> city.savedCities.map(oneCity => {
+         return  (
         <Col md="4" key={city._id}>
           <Card border='dark'>
             {city.image ? (
@@ -60,29 +60,21 @@ const [savedCityIds, setSavedCityIds] = useState(getSavedCityIds());
             <Card.Body>
               <Card.Title>{city.username}'s Trip</Card.Title>
               <Card.Text>
-                {city.savedCities && city.savedCities.length > 0 && city.savedCities[0].cityName && city.savedCities[0].cityName.length > 0 ? (
-              <div><p className='large'>City: {city.savedCities[0].cityName}</p>
-                  <p className='large'>County: {city.savedCities[0].countyName}</p>
-                  <p className='large'>State:{city.savedCities[0].stateName}</p>
-                  <p className='large'>Country: {city.savedCities[0].countryName}</p>
-                  <p className='large'>Latitude: {city.savedCities[0].latitude}</p>
-                  <p className='large'>Longitude: {city.savedCities[0].longitude}</p></div>
-                ) : (
-                  <div><p className='large'>City: Not Available</p>
-                  <p className='large'>County: Not Available</p>
-                  <p className='large'>State:Not Available</p>
-                  <p className='large'>Country: Not Available</p>
-                  <p className='large'>Latitude: Not Available</p>
-                  <p className='large'>Longitude: Not Available</p></div>
-                )}
+                <div><p className='large'>City: {oneCity.cityName}</p>
+                  <p className='large'>County: {oneCity.countyName}</p>
+                  <p className='large'>State:{oneCity.stateName}</p>
+                  <p className='large'>Country: {oneCity.countryName}</p>
+                  <p className='large'>Latitude: {oneCity.latitude}</p>
+                  <p className='large'>Longitude: {oneCity.longitude}</p></div>
+            
 
               </Card.Text>
             </Card.Body>
           </Card>
         </Col>
-        );
-      })
-    }
+        )})))}
+        
+
         </Row>
       </Container>
     </>
