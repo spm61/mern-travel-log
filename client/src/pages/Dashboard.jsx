@@ -145,8 +145,8 @@ const SavedCities = () => {
   // Rendering the saved cities using a Card layout.
   return (
     <>
-      <div className="text-light bg-primary p-5 round">
-        <Container>
+   <div className="text-light bg-primary p-5 rounded-div">
+        <Container className="rounded-container">
           <h1>Search for Locations</h1>
           <Form onSubmit={handleFormSubmit}>
             <Row>
@@ -170,7 +170,8 @@ const SavedCities = () => {
         </Container>
       </div>
 
-      <Container className="round">
+      <div className="rounded-div">
+        <Container className="rounded-container">
         <h2 className="pt-5">
           {searchedCities.length
             ? `Viewing ${searchedCities.length} results:`
@@ -221,8 +222,9 @@ const SavedCities = () => {
           })}
         </Row>
       </Container>
+      </div>
 
-      <div fluid className="text-light bg-primary">
+      <div fluid className="text-light bg-primary rounded-div">
         <Container>
           <h1>Viewing {userData.username}'s saved Cities!</h1>
         </Container>
