@@ -69,7 +69,7 @@ const SavedCities = () => {
         throw new Error("something went wrong!");
       }
 
-      const { results } = await response.json();
+      let { results } = await response.json();
 
       const cityData = results.map((city) => ({
         cityId: city.place_id,
@@ -85,6 +85,19 @@ const SavedCities = () => {
       setSearchedCities(cityData);
       setSearchInput("");
     } catch (err) {
+      const cityData = [{
+        cityId: "not Defined",
+        formattedAddress: "Not Available",
+        cityName: "Not Available",
+        countyName: "Not Available",
+        stateName: "Not Available",
+        countryName: "Not Available",
+        latitude: 0,
+        longitude: 0,
+      }]
+
+      setSearchedCities(cityData);
+      setSearchInput("");
       console.error(err);
     }
   };
@@ -200,7 +213,7 @@ const SavedCities = () => {
                       <p className="small">Latitude: {city.latitude}</p>
                       <p className="small">Longitude: {city.longitude}</p>
                     </Card.Text>
-                    {Auth.loggedIn() && (
+                    {Auth.loggedIn() && (city.cityName != "Not Available") && (
                       <Button
                         disabled={savedCityIds?.some(
                           (savedCityId) => savedCityId === city.cityId
